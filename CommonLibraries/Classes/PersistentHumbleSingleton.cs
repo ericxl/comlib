@@ -33,7 +33,7 @@ public class PersistentHumbleSingleton<T> : MonoBehaviour where T : Component
     /// <summary>
     /// On awake, we check if there's already a copy of the object in the scene. If there's one, we destroy it.
     /// </summary>
-    public virtual void Awake()
+    protected virtual void Awake()
     {
         InitializationTime = Time.time;
 

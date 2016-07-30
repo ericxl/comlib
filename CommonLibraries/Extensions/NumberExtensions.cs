@@ -6,7 +6,7 @@
     }
 
     public static int ToInt(this bool sourse)
-    { 
+    {
         return sourse ? 1 : 0;
     }
 }
