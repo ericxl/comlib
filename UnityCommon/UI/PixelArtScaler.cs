@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace VirtusArts
+namespace VirtusArts.UI
 {
 
     [ExecuteInEditMode]
