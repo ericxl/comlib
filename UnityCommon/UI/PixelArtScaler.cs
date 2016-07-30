@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace VirtusArts.UI
@@ -9,9 +10,17 @@ namespace VirtusArts.UI
     {
         private CanvasScaler scaler;
 
-        [SerializeField] private JoyStick js;
+        [SerializeField]
+        private JoyStick js;
 
-        [SerializeField] private int RefenrenceHeight = 320;
+        [SerializeField]
+        private int RefenrenceHeight = 320;
+
+        [SerializeField]
+        private int RefenrenceWidth = 240;
+
+        [SerializeField]
+        private ScaleMode mode = ScaleMode.BaseOnHeight;
 
         private void Awake()
         {
@@ -28,11 +37,9 @@ namespace VirtusArts.UI
 
         private void UpdateScale()
         {
-            var sca = Mathf.Floor((float)Screen.height / (float)RefenrenceHeight);
-            if (sca < 1)
-            {
-                sca = 1;
-            }
+            var sca = mode == ScaleMode.BaseOnHeight ? Mathf.Floor((float) Screen.height/(float) RefenrenceHeight) : Mathf.Floor((float)Screen.width / (float)RefenrenceWidth);
+            sca = sca < 1 ? 1 : sca;
+
             if (scaler)
             {
                 scaler.scaleFactor = (int)sca;
@@ -41,7 +48,13 @@ namespace VirtusArts.UI
             {
                 js.PixelRatio = 1.0f / sca;
             }
+
         }
     }
 
+    public enum ScaleMode
+    {
+        BaseOnHeight,
+        BaseOnWidth
+    }
 }

@@ -4,20 +4,23 @@ using UnityEngine.EventSystems;
 
 namespace VirtusArts.UI
 {
-
     public class ButtonAnim : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
     {
         [SerializeField]
-        Vector2 pressedScale = new Vector2(0.9f, 0.9f);
-        [SerializeField]
-        Vector2 releasedScale = new Vector2(1.05f, 1.05f);
-        [SerializeField]
-        float releaseTimer = 0.08f;
+        private Vector2 pressedScale = new Vector2(0.9f, 0.9f);
 
         [SerializeField]
-        AudioClip ClickSound;
-        Vector3 _originalScale;
-        void Start()
+        private Vector2 releasedScale = new Vector2(1.05f, 1.05f);
+
+        [SerializeField]
+        private float releaseTimer = 0.08f;
+
+        [SerializeField]
+        private AudioClip ClickSound;
+
+        private Vector3 _originalScale;
+
+        private void Start()
         {
             _originalScale = transform.localScale;
         }
@@ -50,11 +53,11 @@ namespace VirtusArts.UI
             StartCoroutine(ButtonReleaseAnimation());
         }
 
-        IEnumerator ButtonReleaseAnimation()
+        private IEnumerator ButtonReleaseAnimation()
         {
             transform.localScale = new Vector3(releasedScale.x * _originalScale.x, releasedScale.y * _originalScale.y, _originalScale.z);
             yield return new WaitForSecondsRealtime(releaseTimer);
             transform.localScale = _originalScale;
         }
-    } 
+    }
 }
