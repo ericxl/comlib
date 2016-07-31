@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using ItemSystem;
 
 namespace VirtusArts
 {
@@ -10,7 +9,7 @@ namespace VirtusArts
 
         public virtual void Awake()
         {
-            ItemDatabase.Load();
+            ItemSystem.ItemDatabase.Load();
             UserData.Load();
 
         }
