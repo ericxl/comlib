@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace VirtusArts.UI
 {
-    public class MainCanvasManager : CanvasManagerBase<MainCanvasManager>
+    public class MainCanvasManager : CanvasManagerBase
     {
         [SerializeField]
         private RectTransform OptionPanel;
@@ -14,6 +14,11 @@ namespace VirtusArts.UI
         private Toggle SFXToggle;
         [SerializeField]
         private Toggle CloudToggle;
+
+        public new static MainCanvasManager GetInstance()
+        {
+            return BaseInstance as MainCanvasManager;
+        }
 
         protected override void Start()
         {

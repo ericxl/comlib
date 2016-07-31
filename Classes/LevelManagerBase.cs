@@ -2,7 +2,7 @@
 
 namespace VirtusArts
 {
-    public abstract class LevelManagerBase<T> : Singleton<T> where T:MonoBehaviour
+    public abstract class LevelManagerBase : DerivableSingleton<LevelManagerBase>
     {
         [SerializeField]
         private AudioClip SceneClip;

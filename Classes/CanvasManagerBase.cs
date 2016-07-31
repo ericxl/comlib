@@ -4,17 +4,29 @@ using UnityEngine.UI;
 
 namespace VirtusArts.UI
 {
-    public abstract class CanvasManagerBase<T> : Singleton<T> where T: MonoBehaviour
+    public abstract class CanvasManagerBase : DerivableSingleton<CanvasManagerBase>
     {
         [SerializeField]
         private Image Fader;
 
         protected virtual void Start()
         {
-            StartCoroutine(FadeImage(Fader, Constant.FADING_IN_TRANSITION_TIME, FadeType.FadeOut));
+            Transition(FadeType.FadeOut);
         }
 
-        public IEnumerator FadeImage(Image target, float duration, FadeType fadeType)
+        public void Transition(FadeType type)
+        {
+            if (type == FadeType.FadeIn)
+            {
+                StartCoroutine(FadeImage(Fader, Constant.FADING_IN_TRANSITION_TIME, FadeType.FadeIn));
+            }
+            else if (type == FadeType.FadeOut)
+            {
+                StartCoroutine(FadeImage(Fader, Constant.FADING_OUT_TRANSITION_TIME, FadeType.FadeOut));
+            }
+        }
+
+        private IEnumerator FadeImage(Image target, float duration, FadeType fadeType)
         {
             if (target == null)
             {
@@ -48,11 +60,11 @@ namespace VirtusArts.UI
                 Fader.raycastTarget = false;
             }
         }
+    }
 
-        public enum FadeType
-        {
-            FadeIn,
-            FadeOut
-        }
-    } 
+    public enum FadeType
+    {
+        FadeIn,
+        FadeOut
+    }
 }
