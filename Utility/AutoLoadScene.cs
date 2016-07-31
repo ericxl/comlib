@@ -23,23 +23,7 @@ static class SceneAutoLoader
     static SceneAutoLoader()
     {
         EditorApplication.playmodeStateChanged += OnPlayModeChanged;
-        EditorApplication.update += () =>
-        {
-            if(shouldLoad) countdown--;
-            if (countdown <= 0 && shouldLoad)
-            {
-                try
-                {
-                    EditorSceneManager.OpenScene(Application.dataPath + "/_Scenes/" + PreviousScene + ".unity");
-                }
-                finally
-                {
-                    shouldLoad = false;
-                }
-                return;
-            }
-            
-        };
+        EditorApplication.update += OnUpdate;
     }
 
     private static int countdown = 0;
@@ -118,6 +102,24 @@ static class SceneAutoLoader
             shouldLoad = true;
             countdown = 2;
         }
+    }
+
+    private static void OnUpdate()
+    {
+        if (shouldLoad) countdown--;
+        if (countdown <= 0 && shouldLoad)
+        {
+            try
+            {
+                EditorSceneManager.OpenScene(Application.dataPath + "/_Scenes/" + PreviousScene + ".unity");
+            }
+            finally
+            {
+                shouldLoad = false;
+            }
+            return;
+        }
+
     }
 
     // Properties are remembered as editor preferences.
