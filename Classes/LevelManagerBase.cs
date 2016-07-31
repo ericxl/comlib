@@ -11,7 +11,6 @@ namespace VirtusArts
         {
             ItemSystem.ItemDatabase.Load();
             UserData.Load();
-
         }
 
         public virtual void Start()
