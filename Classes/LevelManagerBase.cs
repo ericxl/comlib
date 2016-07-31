@@ -7,10 +7,6 @@ namespace VirtusArts
         [SerializeField]
         private AudioClip SceneClip;
 
-        public virtual void Awake()
-        {
-        }
-
         public virtual void Start()
         {
             SoundManager.PlaySoundtrack(SceneClip);
