@@ -43,6 +43,10 @@ namespace VirtusArts.UI
             }
 
             target.color = color;
+            if (fadeType == FadeType.FadeOut)
+            {
+                Fader.raycastTarget = false;
+            }
         }
 
         public enum FadeType
