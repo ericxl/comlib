@@ -43,7 +43,7 @@ namespace VirtusArts.UI
         {
             if (ClickSound)
             {
-                SoundManager.Instance.PlaySFX(ClickSound);
+                SoundManager.PlaySFX(ClickSound);
             }
             if (releasedScale.x == 1 && releasedScale.y == 1)
             {

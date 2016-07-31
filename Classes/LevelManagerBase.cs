@@ -2,25 +2,23 @@
 
 namespace VirtusArts
 {
-    public abstract class LevelManagerBase : MonoBehaviour
+    public abstract class LevelManagerBase<T> : Singleton<T> where T:MonoBehaviour
     {
         [SerializeField]
         private AudioClip SceneClip;
 
         public virtual void Awake()
         {
-            ItemSystem.ItemDatabase.Load();
-            UserData.Load();
         }
 
         public virtual void Start()
         {
-            SoundManager.Instance.PlaySoundtrack(SceneClip);
+            SoundManager.PlaySoundtrack(SceneClip);
         }
 
         protected virtual void OnApplicationQuit()
         {
-            UserData.Save();
+
         }
     }
 }

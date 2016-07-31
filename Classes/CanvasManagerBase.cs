@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace VirtusArts.UI
 {
-    public abstract class CanvasManagerBase : MonoBehaviour
+    public abstract class CanvasManagerBase<T> : Singleton<T> where T: MonoBehaviour
     {
         [SerializeField]
         private Image Fader;

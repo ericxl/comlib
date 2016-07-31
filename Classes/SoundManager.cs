@@ -16,12 +16,11 @@ namespace VirtusArts
         private AudioMixerGroup sfxGroup;
         private AudioMixerGroup musicGroup;
 
-        private bool sfxIsEnabled;
-        private bool bgIsEnabled;
+        private static bool sfxIsEnabled;
+        private static bool bgIsEnabled;
+        private static bool _in_fading = false;
 
         private AudioSource musicSource;
-
-        private bool _in_fading = false;
 
         protected override void Awake()
         {
@@ -88,7 +87,7 @@ namespace VirtusArts
             Destroy(tempGo, clip.length);
         }
 
-        public bool SFXEnabled
+        public static bool SFXEnabled
         {
             get
             {
@@ -97,11 +96,11 @@ namespace VirtusArts
             set
             {
                 sfxIsEnabled = value;
-                mixer.SetFloat("sfxVol", sfxIsEnabled ? 0.0f : -80.0f);
+                Instance.mixer.SetFloat("sfxVol", sfxIsEnabled ? 0.0f : -80.0f);
             }
         }
 
-        public bool MusicEnabled
+        public static bool MusicEnabled
         {
             get
             {
@@ -110,54 +109,54 @@ namespace VirtusArts
             set
             {
                 bgIsEnabled = value;
-                mixer.SetFloat("musicVol", bgIsEnabled ? 0.0f : -80.0f);
+                Instance.mixer.SetFloat("musicVol", bgIsEnabled ? 0.0f : -80.0f);
             }
         }
 
-        public void PlaySoundtrack(AudioClip clip)
+        public static void PlaySoundtrack(AudioClip clip)
         {
-            if (musicSource.clip == clip || clip == null)
+            if (Instance.musicSource.clip == clip || clip == null)
             {
                 return;
             }
 
-            if (musicSource.clip == null)
+            if (Instance.musicSource.clip == null)
             {
-                musicSource.clip = clip;
-                musicSource.Play();
+                Instance.musicSource.clip = clip;
+                Instance.musicSource.Play();
                 return;
             }
 
-            Crossfade(clip, Constant.BACKGROUND_MUSIC_TRANSITION_TIME);
+            Instance.Crossfade(clip, Constant.BACKGROUND_MUSIC_TRANSITION_TIME);
         }
 
-        public void PlaySFX(string sfxName)
+        public static void PlaySFX(string sfxName)
         {
 
             var clip = Resources.Load<AudioClip>(sfxName);
-            PlayClip(clip);
+            Instance.PlayClip(clip);
         }
 
-        public void PlaySFX(AudioClip clip)
+        public static void PlaySFX(AudioClip clip)
         {
-            PlayClip(clip);
+            Instance.PlayClip(clip);
         }
 
-        public void PlaySFX(IList<AudioClip> clips)
+        public static void PlaySFX(IList<AudioClip> clips)
         {
             if (clips == null || !clips.Any()) return;
             PlaySFX(clips[new System.Random().Next(clips.Count)]);
         }
 
-        public void TransitionToPaused()
+        public static void TransitionToPaused()
         {
-            mixer.TransitionToSnapshots(new[] { paused }, new[] { 1.0f }, 0);
+            Instance.mixer.TransitionToSnapshots(new[] { Instance.paused }, new[] { 1.0f }, 0);
 
         }
 
-        public void TransitionToUnpaused()
+        public static void TransitionToUnpaused()
         {
-            mixer.TransitionToSnapshots(new[] { unpaused }, new[] { 1.0f }, 0);
+            Instance.mixer.TransitionToSnapshots(new[] { Instance.unpaused }, new[] { 1.0f }, 0);
         }
     }
 

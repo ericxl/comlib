@@ -25,7 +25,7 @@ namespace VirtusArts
             }
             set
             {
-                SoundManager.Instance.SFXEnabled = value;
+                SoundManager.SFXEnabled = value;
                 _sfxIsEnabled = value;
                 PlayerPrefs.SetInt(Constant.SFX_KEY, value.ToInt());
             }
@@ -42,7 +42,7 @@ namespace VirtusArts
             }
             set
             {
-                SoundManager.Instance.MusicEnabled = value;
+                SoundManager.MusicEnabled = value;
                 _bgIsEnabled = value;
                 PlayerPrefs.SetInt(Constant.BG_KEY, value.ToInt());
             }

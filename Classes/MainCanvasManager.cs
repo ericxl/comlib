@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace VirtusArts.UI
 {
-    public class MainCanvasManager : CanvasManagerBase
+    public class MainCanvasManager : CanvasManagerBase<MainCanvasManager>
     {
         [SerializeField]
         private RectTransform OptionPanel;
@@ -26,13 +26,13 @@ namespace VirtusArts.UI
 
         public void StartButtonHandler()
         {
-            GamePlayManager.Instance.GotoLevel("Level01");
+            GamePlayManager.GotoLevel("Level01");
         }
 
         private bool showOptionPanel;
         public void OptionButtonHandler()
         {
-            SoundManager.Instance.PlaySFX("pagescroll");
+            SoundManager.PlaySFX("pagescroll");
             showOptionPanel = !showOptionPanel;
             //OptionPanel.GetComponent<EasyTween>().
             OptionPanel.GetComponent<Animator>().SetBool("Show", showOptionPanel);
