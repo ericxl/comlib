@@ -11,10 +11,14 @@ namespace VirtusArts.UI
 
         protected virtual void Start()
         {
-            Transition(FadeType.FadeOut);
+            if (Fader != null)
+            {
+                Transition(FadeType.FadeOut);
+            }
+
         }
 
-        public void Transition(FadeType type)
+        private void Transition(FadeType type)
         {
             if (type == FadeType.FadeIn)
             {
