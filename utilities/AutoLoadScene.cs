@@ -129,19 +129,19 @@ static class SceneAutoLoader
 
     private static bool LoadMasterOnPlay
     {
-        get { return EditorPrefs.GetBool(cEditorPrefLoadMasterOnPlay, false); }
-        set { EditorPrefs.SetBool(cEditorPrefLoadMasterOnPlay, value); }
+        get { return EditorPrefs.GetBool(cEditorPrefLoadMasterOnPlay + "_" + PlayerSettings.productName, false); }
+        set { EditorPrefs.SetBool(cEditorPrefLoadMasterOnPlay + "_" + PlayerSettings.productName, value); }
     }
 
     private static string MasterScene
     {
-        get { return EditorPrefs.GetString(cEditorPrefMasterScene, "Master.unity"); }
-        set { EditorPrefs.SetString(cEditorPrefMasterScene, value); }
+        get { return EditorPrefs.GetString(cEditorPrefMasterScene + "_" + PlayerSettings.productName, "Master.unity"); }
+        set { EditorPrefs.SetString(cEditorPrefMasterScene + "_" + PlayerSettings.productName, value); }
     }
 
     private static string PreviousScene
     {
-        get { return EditorPrefs.GetString(cEditorPrefPreviousScene, EditorSceneManager.GetActiveScene().name); }
-        set { EditorPrefs.SetString(cEditorPrefPreviousScene, value); }
+        get { return EditorPrefs.GetString(cEditorPrefPreviousScene + "_" + PlayerSettings.productName, EditorSceneManager.GetActiveScene().name); }
+        set { EditorPrefs.SetString(cEditorPrefPreviousScene + "_" + PlayerSettings.productName, value); }
     }
 }
