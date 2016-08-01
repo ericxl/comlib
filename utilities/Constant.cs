@@ -9,5 +9,13 @@
         public const string CLOUD_KEY = "CLOUD_ENABLED";
 
         #endregion
-    } 
+
+        #region Scene Transition
+
+        public const float BACKGROUND_MUSIC_TRANSITION_TIME = 1.0f;
+        public const float FADING_OUT_TRANSITION_TIME = 0.8f;
+        public const float FADING_IN_TRANSITION_TIME = 0.8f;
+
+        #endregion
+    }
 }
