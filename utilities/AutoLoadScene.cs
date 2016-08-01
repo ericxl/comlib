@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Scene auto loader.
@@ -145,3 +145,4 @@ static class SceneAutoLoader
         set { EditorPrefs.SetString(cEditorPrefPreviousScene + "_" + PlayerSettings.productName, value); }
     }
 }
+#endif
