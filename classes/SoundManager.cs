@@ -35,10 +35,7 @@ namespace VirtusArts
             musicSource.playOnAwake = false;
             musicSource.loop = true;
             musicSource.outputAudioMixerGroup = musicGroup;
-        }
 
-        protected void Start()
-        {
             SFXEnabled = SettingsManager.SFXEnabled;
             MusicEnabled = SettingsManager.MusicEnabled;
         }
@@ -96,6 +93,7 @@ namespace VirtusArts
             set
             {
                 sfxIsEnabled = value;
+
                 Instance.mixer.SetFloat("sfxVol", sfxIsEnabled ? 0.0f : -80.0f);
             }
         }

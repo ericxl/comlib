@@ -20,7 +20,6 @@ namespace VirtusArts
             get
             {
                 if (!loaded) Load();
-
                 return _sfxIsEnabled;
             }
             set
