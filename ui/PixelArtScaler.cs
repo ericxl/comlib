@@ -1,16 +1,15 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace VirtusArts.UI
 {
-
     [ExecuteInEditMode]
     public class PixelArtScaler : MonoBehaviour
     {
         private CanvasScaler scaler;
 
-        [SerializeField]
-        private JoyStick js;
+        private IList<IPixelScale> scalers;
 
         [SerializeField]
         private int RefenrenceHeight = 320;
@@ -24,6 +23,7 @@ namespace VirtusArts.UI
         private void Awake()
         {
             scaler = GetComponent<CanvasScaler>();
+            scalers = GetComponentsInChildren<JoyStick>(true);
             UpdateScale();
         }
 
@@ -43,11 +43,12 @@ namespace VirtusArts.UI
             {
                 scaler.scaleFactor = (int)sca;
             }
-            if (js)
-            {
-                js.PixelRatio = 1.0f / sca;
-            }
 
+            if (scalers == null) return;
+            foreach (var pixelScale in scalers)
+            {
+                pixelScale.PixelRatio = 1.0f/sca;
+            }
         }
     }
 

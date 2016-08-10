@@ -2,17 +2,10 @@
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityStandardAssets.CrossPlatformInput;
+using VirtusArts.UI;
 
-public class JoyStick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class JoyStick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPixelScale
 {
-    public enum AxisOption
-    {
-        // Options for which axes to use
-        Both, // Use both
-        OnlyHorizontal, // Only horizontal
-        OnlyVertical // Only vertical
-    }
-
     [SerializeField] private int MovementRadius = 75;
     private float _movement_radius;
     [SerializeField] private float StickAlpha = 0.5f;
@@ -180,5 +173,14 @@ public class JoyStick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             m_VerticalVirtualAxis.Remove();
         }
 
+
+    }
+
+    public enum AxisOption
+    {
+        // Options for which axes to use
+        Both, // Use both
+        OnlyHorizontal, // Only horizontal
+        OnlyVertical // Only vertical
     }
 }
