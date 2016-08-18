@@ -38,8 +38,10 @@ public class PersistentSingleton<T> : MonoBehaviour where T : Component
         {
             //If I am the first instance, make me the Singleton
             _instance = this as T;
-            //DontDestroyOnLoad(this);
-            DontDestroyOnLoad(transform.gameObject);
+            if (transform.parent == null)
+            {
+                DontDestroyOnLoad(transform.gameObject);
+            }
         }
         else
         {

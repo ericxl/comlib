@@ -34,6 +34,8 @@ public class SpriteAnimator : MonoBehaviour
 
     public string playAnimationOnStart;
 
+#if !GAME_SERVER
+
     private void Awake()
     {
         if (!spriteRenderer)
@@ -172,4 +174,6 @@ public class SpriteAnimator : MonoBehaviour
         var diff = position.x - transform.position.x;
         spriteRenderer.transform.localScale = diff < 0f ? new Vector3(-1f, 1f, 1f) : new Vector3(1f, 1f, 1f);
     }
+
+#endif
 }

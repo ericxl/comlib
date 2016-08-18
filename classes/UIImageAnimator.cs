@@ -34,6 +34,8 @@ public class UIImageAnimator : MonoBehaviour
 
     public string playAnimationOnStart;
 
+#if !GAME_SERVER
+
     private void Awake()
     {
         if (!imageRenderer)
@@ -157,5 +159,6 @@ public class UIImageAnimator : MonoBehaviour
         }
     }
 
+#endif
 
 }

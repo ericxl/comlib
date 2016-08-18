@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if !GAME_SERVER
+using UnityEngine;
 
 namespace VirtusArts
 {
@@ -63,3 +64,4 @@ namespace VirtusArts
         }
     }
 }
+#endif
