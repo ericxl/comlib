@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if !GAME_SERVER
+using UnityEngine;
 using System.Collections;
 using UnityEngine.EventSystems;
 
@@ -61,3 +62,4 @@ namespace VirtusArts.UI
         }
     }
 }
+#endif
