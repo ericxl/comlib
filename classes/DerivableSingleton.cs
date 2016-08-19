@@ -14,11 +14,6 @@ namespace VirtusArts
             get { return _baseInstance ?? (_baseInstance = FindObjectOfType<T>()); }
         }
 
-        public static T GetInstance()
-        {
-            return BaseInstance;
-        }
-
         protected virtual void Awake()
         {
             _baseInstance = this as T;

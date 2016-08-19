@@ -75,7 +75,7 @@ public static class RandomExtensions
         var u2 = UnityEngine.Random.Range(0.0f, 1.0f);
 
         var rand_std_normal = Math.Sqrt(-2.0f * Math.Log(u1)) * Math.Sin(2.0f * Math.PI * u2);
-        float rand_normal = mu + (float)(sigma * rand_std_normal);
+        var rand_normal = mu + (float)(sigma * rand_std_normal);
         return rand_normal;
     }
 }

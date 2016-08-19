@@ -32,12 +32,10 @@ static class SceneAutoLoader
     [MenuItem("File/Scene Autoload/Select Master Scene...")]
     private static void SelectMasterScene()
     {
-        string masterScene = EditorUtility.OpenFilePanel("Select Master Scene", Application.dataPath, "unity");
-        if (!string.IsNullOrEmpty(masterScene))
-        {
-            MasterScene = masterScene;
-            LoadMasterOnPlay = true;
-        }
+        var masterScene = EditorUtility.OpenFilePanel("Select Master Scene", Application.dataPath, "unity");
+        if (string.IsNullOrEmpty(masterScene)) return;
+        MasterScene = masterScene;
+        LoadMasterOnPlay = true;
     }
 
     [MenuItem("File/Scene Autoload/Load Master On Play", true)]
@@ -107,19 +105,15 @@ static class SceneAutoLoader
     private static void OnUpdate()
     {
         if (shouldLoad) countdown--;
-        if (countdown <= 0 && shouldLoad)
+        if (countdown > 0 || !shouldLoad) return;
+        try
         {
-            try
-            {
-                EditorSceneManager.OpenScene(Application.dataPath + "/_Scenes/" + PreviousScene + ".unity");
-            }
-            finally
-            {
-                shouldLoad = false;
-            }
-            return;
+            EditorSceneManager.OpenScene(Application.dataPath + "/_Scenes/" + PreviousScene + ".unity");
         }
-
+        finally
+        {
+            shouldLoad = false;
+        }
     }
 
     // Properties are remembered as editor preferences.

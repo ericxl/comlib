@@ -150,7 +150,6 @@ namespace VirtusArts
         public static void TransitionToPaused()
         {
             Instance.mixer.TransitionToSnapshots(new[] { Instance.paused }, new[] { 1.0f }, 0);
-
         }
 
         public static void TransitionToUnpaused()

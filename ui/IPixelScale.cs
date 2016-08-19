@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace VirtusArts.UI
+﻿namespace VirtusArts.UI
 {
     public interface IPixelScale
     {
