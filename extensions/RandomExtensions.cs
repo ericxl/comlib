@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 
 public static class RandomExtensions
 {
@@ -50,23 +50,6 @@ public static class RandomExtensions
     public static bool NextBoolean(this Random r)
     {
         return r.Next(2) > 0;
-    }
-
-    /// <summary>
-    ///   Shuffles a list in O(n) time by using the Fisher-Yates/Knuth algorithm.
-    /// </summary>
-    /// <param name="r"></param>
-    /// <param name = "list"></param>
-    public static void Shuffle(this Random r, IList list)
-    {
-        for (var i = 0; i < list.Count; i++)
-        {
-            var j = r.Next(0, i + 1);
-
-            var temp = list[j];
-            list[j] = list[i];
-            list[i] = temp;
-        }
     }
 
     public static float NextGaussian(this UnityEngine.Random r, float mu = 0, float sigma = 1)
