@@ -1,4 +1,5 @@
 ﻿#if UNITY_EDITOR
+using System.IO;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -71,7 +72,7 @@ static class SceneAutoLoader
         if (!EditorApplication.isPlaying && EditorApplication.isPlayingOrWillChangePlaymode)
         {
             // User pressed play -- autoload master scene.
-            PreviousScene = EditorSceneManager.GetActiveScene().name;
+            PreviousScenePath = EditorSceneManager.GetActiveScene().path;
             if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
             {
                 //if (!EditorApplication.OpenScene(MasterScene))
@@ -90,13 +91,13 @@ static class SceneAutoLoader
         if (EditorApplication.isPlaying && !EditorApplication.isPlayingOrWillChangePlaymode)
         {
             // User pressed stop -- reload previous scene.
-            //if (!EditorApplication.OpenScene(PreviousScene))
+            //if (!EditorApplication.OpenScene(PreviousScenePath))
             //{
-            //    Debug.LogError(string.Format("error: scene not found: {0}", PreviousScene));
+            //    Debug.LogError(string.Format("error: scene not found: {0}", PreviousScenePath));
             //}
-            //EditorSceneManager.LoadScene(PreviousScene);
-            //EditorSceneManager.LoadScene(PreviousScene);
-            //EditorSceneManager.OpenScene("C:/repos/TapFortress/Assets/_Scenes/" + PreviousScene + ".unity");
+            //EditorSceneManager.LoadScene(PreviousScenePath);
+            //EditorSceneManager.LoadScene(PreviousScenePath);
+            //EditorSceneManager.OpenScene("C:/repos/TapFortress/Assets/_Scenes/" + PreviousScenePath + ".unity");
             shouldLoad = true;
             countdown = 2;
         }
@@ -108,7 +109,7 @@ static class SceneAutoLoader
         if (countdown > 0 || !shouldLoad) return;
         try
         {
-            EditorSceneManager.OpenScene(Application.dataPath + "/_Scenes/" + PreviousScene + ".unity");
+            EditorSceneManager.OpenScene(Path.GetDirectoryName(Application.dataPath) + "/" + PreviousScenePath);
         }
         finally
         {
@@ -119,7 +120,7 @@ static class SceneAutoLoader
     // Properties are remembered as editor preferences.
     private const string cEditorPrefLoadMasterOnPlay = "SceneAutoLoader.LoadMasterOnPlay";
     private const string cEditorPrefMasterScene = "SceneAutoLoader.MasterScene";
-    private const string cEditorPrefPreviousScene = "SceneAutoLoader.PreviousScene";
+    private const string cEditorPrefPreviousScene = "SceneAutoLoader.PreviousScenePath";
 
     private static bool LoadMasterOnPlay
     {
@@ -133,7 +134,7 @@ static class SceneAutoLoader
         set { EditorPrefs.SetString(cEditorPrefMasterScene + "_" + PlayerSettings.productName, value); }
     }
 
-    private static string PreviousScene
+    private static string PreviousScenePath
     {
         get { return EditorPrefs.GetString(cEditorPrefPreviousScene + "_" + PlayerSettings.productName, EditorSceneManager.GetActiveScene().name); }
         set { EditorPrefs.SetString(cEditorPrefPreviousScene + "_" + PlayerSettings.productName, value); }
