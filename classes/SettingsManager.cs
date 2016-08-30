@@ -5,14 +5,11 @@ namespace VirtusArts
 {
     public static class SettingsManager
     {
-        private static bool loaded = false;
-        private static void Load()
+        static SettingsManager()
         {
-            if (loaded) return;
             _sfxIsEnabled = PlayerPrefs.GetInt(Constant.SFX_KEY, 1).ToBoolean();
             _bgIsEnabled = PlayerPrefs.GetInt(Constant.BG_KEY, 1).ToBoolean();
             _cloudIsEnabled = PlayerPrefs.GetInt(Constant.CLOUD_KEY, 1).ToBoolean();
-            loaded = true;
         }
 
         private static bool _sfxIsEnabled = false;
@@ -20,7 +17,6 @@ namespace VirtusArts
         {
             get
             {
-                if (!loaded) Load();
                 return _sfxIsEnabled;
             }
             set
@@ -36,8 +32,6 @@ namespace VirtusArts
         {
             get
             {
-                if (!loaded) Load();
-
                 return _bgIsEnabled;
             }
             set
@@ -53,7 +47,6 @@ namespace VirtusArts
         {
             get
             {
-                if (!loaded) Load();
                 return _cloudIsEnabled;
             }
             set

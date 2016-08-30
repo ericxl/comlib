@@ -8,23 +8,29 @@ namespace VirtusArts.UI
     {
         protected virtual void Start()
         {
+            FadeOut(InitializeFader().GetComponent<Image>(), Constant.FADING_OUT_TRANSITION_TIME);
+        }
+
+        protected GameObject InitializeFader()
+        {
             var faderGo = new GameObject("Fader");
             faderGo.transform.SetParent(transform, false);
             var fader = faderGo.AddComponent<Image>();
+            fader.color = new Color(0,0,0,1);
             var rt = faderGo.GetComponent<RectTransform>();
             rt.offsetMin = rt.offsetMax = Vector2.zero;
             rt.anchoredPosition = Vector2.zero;
             rt.anchorMax = new Vector2(1, 1);
             rt.anchorMin = new Vector2(0, 0);
-            Transition(fader, FadeType.FadeOut);
+            return faderGo;
         }
 
-        private void Transition<T>(T fader, FadeType fadeType) where T : Graphic
+        protected void FadeOut<T>(T fader, float duration) where T : Graphic
         {
-            StartCoroutine(FadeImage(fader, fadeType == FadeType.FadeIn ? Constant.FADING_IN_TRANSITION_TIME : Constant.FADING_OUT_TRANSITION_TIME, fadeType));
+            StartCoroutine(FadeImage(fader, FadeType.FadeOut, duration));
         }
 
-        private static IEnumerator FadeImage<T>(T target, float duration, FadeType fadeType) where T : Graphic
+        private IEnumerator FadeImage<T>(T target, FadeType fadeType, float duration) where T : Graphic
         {
             if (target == null) yield break;
 
