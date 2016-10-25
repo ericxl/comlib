@@ -33,9 +33,10 @@ public static class IEnumerableExtensions
     public static void PopulateDataBy<TData, TController>(this IList<TController> goList, IList<TData> list, Func<TData, TController> AddFactory, Action<TController, TData> UpdateFactory,
         Action<TController> CleanUpFactory)
     {
-        var iteration = Math.Min(goList.Count, list.Count);
-        var maxIteration = Math.Max(goList.Count, list.Count);
-        var deleteGo = goList.Count > list.Count;
+        var listCount = list == null ? 0 : list.Count;
+        var iteration = Math.Min(goList.Count, listCount);
+        var maxIteration = Math.Max(goList.Count, listCount);
+        var deleteGo = goList.Count > listCount;
         if (UpdateFactory != null)
         {
             for (var i = 0; i < iteration; i++)
