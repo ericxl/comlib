@@ -19,5 +19,13 @@ public static class IEnumerableExtensions
             list[i] = temp;
         }
     }
+
+    public static bool Equals<T>(this IList<T> list, IList<T> other)
+    {
+        if (list == null && other != null) return false;
+        if (list != null && other == null) return false;
+        if (list == null && other == null) return true;
+        return new HashSet<T>(list).SetEquals(other);
+    }
 }
 
