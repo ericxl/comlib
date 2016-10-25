@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+
 public static class IEnumerableExtensions
 {
     /// <summary>
@@ -25,7 +27,8 @@ public static class IEnumerableExtensions
         if (list == null && other != null) return false;
         if (list != null && other == null) return false;
         if (list == null && other == null) return true;
-        return new HashSet<T>(list).SetEquals(other);
+        if (list.Count != other.Count) return false;
+        return !list.Where((t, i) => Newtonsoft.Json.JsonConvert.SerializeObject(t) != Newtonsoft.Json.JsonConvert.SerializeObject(other[i])).Any();
     }
 }
 
